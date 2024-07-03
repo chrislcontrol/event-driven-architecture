@@ -1,6 +1,6 @@
 services:
   accountsdb:
-    container_name: accountsdb
+    container_name: accounts-db
     image: debezium/postgres:16
     environment:
       POSTGRES_USER: postgres
@@ -8,6 +8,28 @@ services:
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
+  
+  balancedb:
+    container_name: balance-db
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+
+  dynamodb: 
+    image: "aaronshaf/dynamodb-admin"
+    container_name: dynamodb-admin
+    depends_on:
+      - balancedb
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://balancedb:8000
+      - AWS_REGION=ap-southeast-1
 
   zookeeper:
     container_name: zookeeper
