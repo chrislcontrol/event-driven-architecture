@@ -18,11 +18,11 @@ scalability and reliability between microservices.
   * Java
   * Spring
 * Balances Service:
+  * Go
+  * Gin
+* Transfers Service:
   * NodeJS
   * Express
-* Transfers Service:
-  * Golang
-  * Gin
 * Statements Service:
   * Python
   * Fast-api
@@ -30,6 +30,8 @@ scalability and reliability between microservices.
   * Kubernetes
   * Istio Service Mesh
   * Apache Kafka
+  * Debezium
+  * Kafdrop
   * API Gateway
   * CloudFlare
   * Docker
