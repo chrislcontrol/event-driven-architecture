@@ -14,11 +14,6 @@ import java.util.UUID;
 @Table(name = "account",
         uniqueConstraints = {@UniqueConstraint(name = "UniqueBranchAndNumber", columnNames = {"branch", "number"})})
 public class Account {
-    public enum Status {
-        APPROVED,
-        ANALYZING,
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,18 +21,11 @@ public class Account {
     @Column(name = "public_id", unique = true, updatable = false, nullable = false)
     private UUID publicId;
 
-    @Column(name = "approved_at")
-    private LocalDateTime approvedAt = null;
-
-    @Column(name = "number", unique = true, insertable = false)
+    @Column(name = "number", insertable = false)
     private Long number = null;
 
     @Column(name = "branch", nullable = false)
     private Long branch;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status = Status.ANALYZING;
 
     public int getBankNumber() {
         return 1;

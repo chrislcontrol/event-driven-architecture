@@ -23,6 +23,11 @@ public class CreateAccount {
 
         accountRepository.save(account);
 
+        var accountNumber = accountRepository.countAccountsByBranchAndIdLessThan(account.getBranch(), account.getId());
+        account.setNumber(++accountNumber);
+
+        accountRepository.save(account);
+
         return AccountOutputDTO.fromAccount(account);
     }
 }

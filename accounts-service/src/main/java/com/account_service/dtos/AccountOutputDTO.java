@@ -12,16 +12,16 @@ import java.util.UUID;
 @Setter
 public class AccountOutputDTO {
     private UUID id;
-    private Account.Status status;
     private Long branch;
     private int bankNumber;
+    private Long number;
 
     public static AccountOutputDTO fromAccount(Account account) {
         return builder()
                 .id(account.getPublicId())
-                .status(account.getStatus())
                 .bankNumber(account.getBankNumber())
                 .branch(account.getBranch())
+                .number(account.getNumber())
                 .build();
     }
 }
